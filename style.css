@@ -1,3 +1,7 @@
+html{
+    padding: 2em;
+}
+
 .container {
     margin: auto;
     background-color: aqua;
