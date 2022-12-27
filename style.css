@@ -1,5 +1,50 @@
-h1 {
-    text-decoration: underline;
+.container {
+    margin: auto;
+    background-color: aqua;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    max-width: 30rem;
+    border: solid black;
 }
 
-/*
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-item {
+    display: flex;
+    background-color: blue;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    height: 5rem;
+    border-radius: 0.4rem;
+    font-size: 250%;
+    border: solid black;
+}
+
+.grid-item:active {
+    background-color: blueviolet;
+}
+
+.equal {
+    grid-column-end: span 2;
+}
+
+.display {
+    display: grid;
+    height: 10em;
+    background-color: crimson;
+    margin: 5%;
+    border-radius: 0.4rem;
+    justify-content: end;
+    align-items: center;
+    border: solid black;
+}
+
+.screen {
+    color: white;
+    font-size: 250%;
+}
