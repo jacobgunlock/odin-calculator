@@ -1,9 +1,5 @@
-html{
-    padding: 2em;
-}
-
 .container {
-    margin: auto;
+    margin: 2em auto;
     background-color: aqua;
     border-radius: 0.4rem;
     padding: 1rem;
