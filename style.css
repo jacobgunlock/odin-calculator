@@ -1,5 +1,5 @@
 .container {
-    margin: 2em auto;
+    margin: 4em auto;
     background-color: aqua;
     border-radius: 0.4rem;
     padding: 1rem;
@@ -7,12 +7,12 @@
     border: solid black;
 }
 
-.grid {
+.buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
 
-.grid-item {
+.item {
     display: flex;
     background-color: blue;
     color: white;
@@ -23,14 +23,11 @@
     border-radius: 0.4rem;
     font-size: 250%;
     border: solid black;
+    user-select: none;
 }
 
-.grid-item:active {
+.item:active {
     background-color: blueviolet;
-}
-
-.equal {
-    grid-column-end: span 2;
 }
 
 .display {
@@ -42,9 +39,18 @@
     justify-content: end;
     align-items: center;
     border: solid black;
+    text-align: center;
 }
 
 .screen {
     color: white;
     font-size: 250%;
+    user-select: none;
+}
+
+.input {
+    border: solid;
+}
+.output {
+    border: solid;
 }
