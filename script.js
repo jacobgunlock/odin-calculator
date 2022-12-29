@@ -35,7 +35,6 @@ Array.from(operators).forEach(operator => {
                 output.innerHTML = Math.round(answer*1000)/1000 + ' ' + operateSign;
                 a = Math.round(answer*1000)/1000;
                 b = undefined;
-                console.log('here')
             } else {
                 operateSign = operator.innerHTML;
                 output.innerHTML = a + ' ' + operateSign;
@@ -49,6 +48,8 @@ clearBtn.addEventListener('click', () => {
     output.innerHTML = '';
     a = undefined;
     b = undefined;
+    answer = undefined;
+    operateSign = undefined;
 });
 
 delBtn.addEventListener('click', () => {
