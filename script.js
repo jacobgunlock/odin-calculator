@@ -30,10 +30,12 @@ Array.from(operators).forEach(operator => {
         } else {
             operate(a, b, operateSign);
             if (a !== undefined && b !== undefined){
+                if (isNaN(answer)) return;
                 operateSign = operator.innerHTML;
                 output.innerHTML = Math.round(answer*1000)/1000 + ' ' + operateSign;
                 a = Math.round(answer*1000)/1000;
                 b = undefined;
+                console.log('here')
             } else {
                 operateSign = operator.innerHTML;
                 output.innerHTML = a + ' ' + operateSign;
@@ -59,9 +61,12 @@ equalBtn.addEventListener('click', () => {
     if (a == undefined) return;
     b = Number(input.innerHTML);
     operate(a,b,operateSign);
-    if (answer == undefined) return;
-    output.innerHTML = Math.round(answer * 1000)/1000;
-    operateSign = undefined;
+    if (isNaN(answer)) {
+        return;
+    } else {
+        output.innerHTML = Math.round(answer * 1000)/1000;
+        operateSign = undefined;
+    };
 });
 
 negativeBtn.addEventListener('click', () => {
