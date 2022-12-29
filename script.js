@@ -6,6 +6,7 @@ const clearBtn = document.querySelector('.clear')
 const delBtn = document.querySelector('.del');
 const equalBtn = document.querySelector('.equal');
 const negativeBtn = document.querySelector('.negative');
+const decimalBtn = document.querySelector('.decimal');
 let a;
 let b;
 let operateSign;
@@ -14,30 +15,29 @@ let answer;
 Array.from(nums).forEach(num => {
     num.addEventListener('click', () => {
         const value = num.innerHTML;
-        if (output.innerHTML === '') {
-            input.innerHTML += value;
-            a = parseInt(input.innerHTML);
-            console.log('a',a);
-        } else {
-            input.innerHTML += value;
-            b = parseInt(input.innerHTML);
-            console.log('b', b);
-        }
+        input.innerHTML += value;
+        output.innerHTML === '' ? a=Number(input.innerHTML) : b=Number(input.innerHTML);
     });    
 });
 
 Array.from(operators).forEach(operator => {
     operator.addEventListener('click', () => {
-        if (output.innerHTML === '') {
+        if (input.innerHTML == '' && output.innerHTML == '') return;
+        if (output.innerHTML === '' ) {
             operateSign = operator.innerHTML;
-            console.log('operator',operateSign);
             output.innerHTML = input.innerHTML + " " + operateSign;
             input.innerHTML = '';
         } else {
             operate(a, b, operateSign);
-            operateSign = operator.innerHTML;
-            output.innerHTML = answer + ' ' + operateSign;
-            a = answer;
+            if (a !== undefined && b !== undefined){
+                operateSign = operator.innerHTML;
+                output.innerHTML = Math.round(answer*1000)/1000 + ' ' + operateSign;
+                a = Math.round(answer*1000)/1000;
+                b = undefined;
+            } else {
+                operateSign = operator.innerHTML;
+                output.innerHTML = a + ' ' + operateSign;
+            }
         }
     });
 });
@@ -45,80 +45,67 @@ Array.from(operators).forEach(operator => {
 clearBtn.addEventListener('click', () => {
     input.innerHTML = '';
     output.innerHTML = '';
-    a = 0;
-    b = 0;
+    a = undefined;
+    b = undefined;
 });
 
 delBtn.addEventListener('click', () => {
+    if (a == undefined || b == undefined) return;
     input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length-1);
-    if (output.innerHTML === '') {
-        a = parseInt(input.innerHTML);
-    } b = parseInt(input.innerHTML);
+    output.innerHTML === '' ? a=Number(input.innerHTML) : b=Number(input.innerHTML);
 });
 
 equalBtn.addEventListener('click', () => {
+    if (a == undefined) return;
+    b = Number(input.innerHTML);
     operate(a,b,operateSign);
-    console.log('answer', answer);
-    output.innerHTML = answer;
+    if (answer == undefined) return;
+    output.innerHTML = Math.round(answer * 1000)/1000;
     operateSign = undefined;
 });
 
 negativeBtn.addEventListener('click', () => {
     if (input.innerHTML === '') return;
-
     if (!(input.innerHTML).includes('-')) {
         input.innerHTML = '-'+input.innerHTML;
-        if (output.innerHTML != '') {
-            b = parseInt(input.innerHTML);
-            console.log('neg b', b)
-        } else {
-            a = parseInt(input.innerHTML);
-            console.log('neg a', a);
-        }
+        output.innerHTML != '' ? b=Number(input.innerHTML) : a=Number(input.innerHTML);
     } else {
         input.innerHTML = input.innerHTML.slice(1, input.innerHTML.length);
-
-        if (output.innerHTML != '') {
-        b = parseInt(input.innerHTML);
-        console.log('pos b', b)
-        } else {
-        a = parseInt(input.innerHTML)
-        console.log('pos a', a);
-        }
+        output.innerHTML != '' ? b=Number(input.innerHTML) : a=Number(input.innerHTML);
     };
 });
-    
+
+decimalBtn.addEventListener('click', () => {
+    if (input.innerHTML === '') return;
+    if (!(input.innerHTML).includes('.')) {
+        input.innerHTML = input.innerHTML + '.';
+        output.innerHTML != '' ? b=Number(input.innerHTML) : a=Number(input.innerHTML);
+    };
+});
+ 
 function operate (a, b, operateSign) {
-    if (operateSign == undefined) return;
+    if (operateSign === undefined) return;
+    if (a === undefined || b === undefined) return;
     switch (operateSign){
         case ('+'):  
             answer = a + b;
-            output.innerHTML = answer;
             input.innerHTML = '';
-            return answer;
+            return Math.round(answer*1000)/1000;
         case ('-'):
             answer = a - b;
-            output.innerHTML = answer;
             input.innerHTML = '';
-            return answer;
+            return Math.round(answer*1000)/1000;
         case ('*'):
             answer = a * b;
-            output.innerHTML = answer;
             input.innerHTML = '';
-            return answer;
+            return Math.round(answer*1000)/1000;
         case ('/'):
             answer = a / b;
-            output.innerHTML = answer;
             input.innerHTML = '';
-            return answer;
+            return Math.round(answer*1000)/1000;
         case ('%'):
             answer = a % b;
-            output.innerHTML = answer;
             input.innerHTML = '';
-            return answer;
+            return Math.round(answer*1000)/1000;
     };
 };
-
-
-
-
